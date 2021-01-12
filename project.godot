@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "BasePanel",
+"language": "GDScript",
+"path": "res://script/ui/base/BasePanel.gd"
+} ]
 _global_script_class_icons={
-
+"BasePanel": ""
 }
 
 [application]
