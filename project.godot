@@ -9,19 +9,29 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Control",
+"base": "Object",
 "class": "BasePanel",
 "language": "GDScript",
 "path": "res://script/ui/base/BasePanel.gd"
+}, {
+"base": "BasePanel",
+"class": "TestPanel",
+"language": "GDScript",
+"path": "res://script/modules/TestPanel.gd"
 } ]
 _global_script_class_icons={
-"BasePanel": ""
+"BasePanel": "",
+"TestPanel": ""
 }
 
 [application]
 
 config/name="game-study"
 config/icon="res://icon.png"
+
+[autoload]
+
+UiManager="*res://script/ui/UIManager.tscn"
 
 [rendering]
 
