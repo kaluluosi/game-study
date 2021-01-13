@@ -9,6 +9,9 @@ var UIName:String setget , _get_ui_name
 var ui:Control
 var layer:Control
 
+# 是否可导航
+var navitable:bool = false 
+
 func _init():
 	print('在_init里面设置UIName')
 	pass
