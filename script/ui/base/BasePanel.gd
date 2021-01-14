@@ -9,9 +9,6 @@ var UIName:String setget , _get_ui_name
 var ui:Control
 var layer:Control
 
-# 是否可导航
-var navitable:bool = false 
-
 func _init():
 	print('在_init里面设置UIName')
 	pass
@@ -37,7 +34,7 @@ func show():
 		ui.connect("tree_exiting", self, '_exiting_tree')
 		ui.connect("tree_exited", self, '_exit_tree')
 
-		UiManager.add_ui_to_layer(ui, layer)
+		UiManager.add_ui_to_layer(self, layer)
 	else:
 		# 如果界面已加载就显示界面
 		ui.show()
