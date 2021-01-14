@@ -9,6 +9,9 @@ var UIName:String setget , _get_ui_name
 var ui:Control
 var layer:Control
 
+signal hide
+signal close
+
 func _init():
 	print('在_init里面设置UIName')
 	pass
@@ -44,6 +47,7 @@ func hide():
 	隐藏界面，但是不会销毁ui对象，因此图集资源仍然会在现存里
 	"""
 	ui.hide()
+	emit_signal("hide")
 	
 func close():
 	"""
@@ -51,6 +55,7 @@ func close():
 	"""
 	hide()
 	ui.queue_free()
+	emit_signal("close")
 	
 func _ready():
 	pass

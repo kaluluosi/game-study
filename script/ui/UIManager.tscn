@@ -10,27 +10,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bottom" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="main" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="default" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="dialog" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="top" type="Control" parent="."]
+[node name="popup" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
