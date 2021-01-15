@@ -25,9 +25,8 @@ func _on_Button_pressed():
 
 
 func _on_msgbox_pressed():
-	var box = UIUtil.messagebox('测试','hehe', MessageBox.Type.OK_CANCEL)
+	var box = UIUtil.messagebox('测试','这是个测试文本，试一下按按钮。。。。。。。。。。。。。。。。。。。。。。。。。。', MessageBox.Type.OK_CANCEL)
 	var ret = yield(box, 'done')
-	print(box)
 
 	match ret:
 		MessageBox.Result.OK:

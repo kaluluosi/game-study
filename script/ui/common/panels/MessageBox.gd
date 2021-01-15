@@ -52,8 +52,7 @@ func _ready():
 	
 func _on_done(result):
 	emit_signal('done', result)
-	hide()
-	ui.queue_free()
+	close()
 	
 func _set_title(value:String):
 	_title = value

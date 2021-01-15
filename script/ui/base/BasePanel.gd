@@ -17,6 +17,9 @@ func ready():
 	var _in = load("res://asset/ui/common/animation/ScaleUp.tres") as Animation
 	_animation_player.add_animation('_in', _in)
 	
+	var _out = load("res://asset/ui/common/animation/ScaleDown.tres") as Animation
+	_animation_player.add_animation('_out', _out)
+	
 	resized()
 	ui.connect("resized", self, 'resized')
 	
@@ -27,3 +30,8 @@ func resized():
 func show():
 	.show()
 	_animation_player.play('_in')
+
+func close():
+	_animation_player.play('_out')
+	yield(_animation_player,"animation_finished")
+	.close()
