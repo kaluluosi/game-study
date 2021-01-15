@@ -12,12 +12,15 @@ extends Control
 
 # 层
 onready var Layers = {
-	bottom = $bottom,
-	hud = $hud,
-	base = $base,
-	popup = $popup,
-	top = $top
+	bottom = $Layers/bottom,
+	hud = $Layers/hud,
+	base = $Layers/base,
+	popup = $Layers/popup,
+	top = $Layers/top
 }
 
-func add_ui_to_layer(panel:BasePanel, layer:Control):
+var global_value = {}
+
+func add_ui_to_layer(panel:BaseView, layer:Control):
 	layer.add_child(panel.ui)
+

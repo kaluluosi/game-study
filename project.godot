@@ -9,10 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Object",
+"base": "BaseView",
 "class": "BasePanel",
 "language": "GDScript",
 "path": "res://script/ui/base/BasePanel.gd"
+}, {
+"base": "Object",
+"class": "BaseView",
+"language": "GDScript",
+"path": "res://script/ui/base/BaseView.gd"
 }, {
 "base": "Object",
 "class": "Ginq",
@@ -34,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/ui/common/panels/MessageBox.gd"
 }, {
+"base": "BaseView",
+"class": "PopHint",
+"language": "GDScript",
+"path": "res://script/ui/common/panels/PopHint.gd"
+}, {
 "base": "RichTextEffect",
 "class": "RichTextGhost",
 "language": "GDScript",
@@ -54,27 +64,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/ui/common/rich_text_effect/pulse.gd"
 }, {
-"base": "RichTextEffect",
-"class": "_FontSizeEffect",
+"base": "Object",
+"class": "UIUtil",
 "language": "GDScript",
-"path": "res://script/ui/common/component/_FontSizeEffect.gd"
+"path": "res://script/ui/common/utils/UIUtil.gd"
 } ]
 _global_script_class_icons={
 "BasePanel": "",
+"BaseView": "",
 "Ginq": "",
 "HideTextFX": "",
 "Lambda": "",
 "MessageBox": "",
+"PopHint": "",
 "RichTextGhost": "",
 "RichTextLabelEx": "",
 "RichTextMatrix": "",
 "RichTextPulse": "",
-"_FontSizeEffect": ""
+"UIUtil": ""
 }
 
 [application]
 
 config/name="game-study"
+run/main_scene="res://scene/test.tscn"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -83,4 +97,5 @@ UiManager="*res://script/ui/UIManager.tscn"
 
 [rendering]
 
+quality/subsurface_scattering/quality=2
 environment/default_environment="res://default_env.tres"

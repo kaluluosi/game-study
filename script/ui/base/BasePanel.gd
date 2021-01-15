@@ -2,76 +2,28 @@
 界面基类
 """
 
-extends Object
+extends BaseView
 class_name BasePanel
 
-var UIName:String setget , _get_ui_name
-var ui:Control
-var layer:Control
-
-signal hide
-signal close
+var _animation_player:AnimationPlayer
 
 func _init():
-	print('在_init里面设置UIName')
-	pass
-
-func _get_ui_name()->String:
-	"""
-	获取UI名字 tscn资源路径（相对于asset/ui，不含res：//）
-	"""
-	return UIName
-
+	_animation_player = AnimationPlayer.new()
+	connect("ready",self, 'ready')
+	
+func ready():
+	ui.add_child(_animation_player)
+	
+	var _in = load("res://asset/ui/common/animation/ScaleUp.tres") as Animation
+	_animation_player.add_animation('_in', _in)
+	
+	resized()
+	ui.connect("resized", self, 'resized')
+	
+func resized():
+	var new_pivot = Vector2(ui.rect_size.x/2, ui.rect_size.y/2)
+	ui.rect_pivot_offset = new_pivot
 
 func show():
-	"""
-	显示界面
-	"""
-	if not ui :
-		# 如果界面没有加载，那么就加载界面
-		var res_path = "res://asset/ui/%s"%UIName
-		var tscn = load(res_path)
-		ui = tscn.instance() as Control
-		ui.connect("ready", self, '_ready')
-		ui.connect("tree_entered", self, '_enter_tree')
-		ui.connect("tree_exiting", self, '_exiting_tree')
-		ui.connect("tree_exited", self, '_exit_tree')
-
-		UiManager.add_ui_to_layer(self, layer)
-	else:
-		# 如果界面已加载就显示界面
-		ui.show()
-
-func hide():
-	"""
-	隐藏界面，但是不会销毁ui对象，因此图集资源仍然会在现存里
-	"""
-	ui.hide()
-	emit_signal("hide")
-	
-func close():
-	"""
-	隐藏界面，并释放界面对象和资源
-	"""
-	hide()
-	ui.queue_free()
-	emit_signal("close")
-	
-func _ready():
-	pass
-
-func _enter_tree():
-	pass
-
-func _exit_tree():
-	pass
-
-func _exiting_tree():
-	pass
-
-func destroy():
-	"""
-	释放对象
-	"""
-	ui.queue_free()
-	call_deferred('free')
+	.show()
+	_animation_player.play('_in')

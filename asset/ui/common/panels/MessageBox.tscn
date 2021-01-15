@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/theme/font/WindowTitle.tres" type="DynamicFont" id=1]
 [ext_resource path="res://asset/theme/styles/WindowTitleBarBg.tres" type="StyleBox" id=2]
-[ext_resource path="res://script/ui/common/component/_FontSizeEffect.gd" type="Script" id=3]
 [ext_resource path="res://asset/font/bold.tres" type="DynamicFont" id=4]
 [ext_resource path="res://asset/font/italic.tres" type="DynamicFont" id=5]
 [ext_resource path="res://asset/font/normal.tres" type="DynamicFont" id=6]
@@ -13,9 +12,6 @@
 [sub_resource type="StreamTexture" id=2]
 flags = 4
 load_path = "res://.import/close.svg-f6093a9ba8e56fba7f7a56abbd7f1878.stex"
-
-[sub_resource type="RichTextEffect" id=3]
-script = ExtResource( 3 )
 
 [node name="MessageBox" type="Control"]
 anchor_right = 1.0
@@ -94,12 +90,9 @@ margin_bottom = 221.0
 custom_fonts/italics_font = ExtResource( 5 )
 custom_fonts/bold_font = ExtResource( 4 )
 custom_fonts/normal_font = ExtResource( 6 )
-text = "helloItalic"
-custom_effects = [ SubResource( 3 ) ]
+text = "hello"
 script = ExtResource( 7 )
-bb_code = "[font size=40][color=red]hello[/color][/font][color=red]hello[/color]
-hello 
-[font size=80][i]Italic[/i][/font]"
+bb_code = "[color=red]hello[/color]"
 
 [node name="Buttons" type="Control" parent="Panel/VBoxContainer"]
 margin_top = 299.0

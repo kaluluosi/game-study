@@ -10,9 +10,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="popup" type="Control" parent="."]
+[node name="Layers" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="bottom" type="Control" parent="Layers"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hud" type="Control" parent="Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="base" type="Control" parent="Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="popup" type="Control" parent="Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="top" type="Control" parent="Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

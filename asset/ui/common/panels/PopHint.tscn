@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://script/ui/common/component/RichTextLabelEx.gd" type="Script" id=1]
+[ext_resource path="res://asset/font/normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://asset/font/bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://asset/font/italic.tres" type="DynamicFont" id=4]
+[ext_resource path="res://asset/font/bold-italic.tres" type="DynamicFont" id=5]
+[ext_resource path="res://asset/ui/common/animation/FadeOutUp.tres" type="Animation" id=6]
+[ext_resource path="res://asset/ui/common/animation/FadeIn.tres" type="Animation" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.215686 )
+
+[node name="PopHint" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -510.0
+margin_top = -20.0
+margin_right = 511.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 400, 28 )
+mouse_filter = 2
+custom_styles/normal = SubResource( 1 )
+custom_fonts/bold_italics_font = ExtResource( 5 )
+custom_fonts/italics_font = ExtResource( 4 )
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 2 )
+text = "获得 极品道具"
+scroll_active = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+bb_code = "[center][b]获得 [color=red]极品道具[/color][/b][/center]"
+cycling_scroll = true
+cycling_end_wait = 5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = ExtResource( 7 )
+anims/FadeOutUp = ExtResource( 6 )

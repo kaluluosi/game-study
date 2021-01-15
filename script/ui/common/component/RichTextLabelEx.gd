@@ -2,16 +2,31 @@ tool
 extends RichTextLabel
 class_name RichTextLabelEx
 
+
 export(String, MULTILINE) var bb_code:String setget set_bbcode,get_bbcode
+export(bool) var cycling_scroll = false
+export(float) var cycling_end_wait = 1
+
 var _regex_flag:RegEx
 const flag_pattern = "\\[font size=(?<size>\\d+)\\]|\\[/font\\]"
+var _effect:RichTextEffect
+
+var _timer:Timer
+
+var scroll_direction = 1
+var end = null
 
 func _init():
 	_regex_flag = RegEx.new()
 	_regex_flag.compile(flag_pattern)
-	var _effect = _FontSizeEffect.new()
-	custom_effects.append(_effect)
+	
+	_timer = Timer.new()
+	_timer.wait_time = 1
+	_timer.autostart = true
 
+func _ready():
+	add_child(_timer)
+	_timer.connect("timeout", self, '_update_cycling')
 
 func _handle_next_font_size_tag(value: String) -> String:
 
@@ -92,10 +107,29 @@ func set_bbcode(value: String):
 	
 	.clear()
 	value = self._handle_next_font_size_tag(value)
-#
-#	# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	.append_bbcode(value)
+
 
 func get_bbcode():
 	return bb_code
-	
+
+func _update_cycling():
+	if cycling_scroll == false:
+		return
+
+	var scroll = get_v_scroll()
+
+	scroll.value += scroll_direction
+
+	if end == null:
+		end = scroll.max_value - rect_min_size.y
+
+	if scroll_direction == 1 and scroll.value >= end:
+		yield(get_tree().create_timer(cycling_end_wait), 'timeout')
+		scroll_direction = -1
+		end = 0
+	elif scroll_direction == -1 and scroll.value <= end:
+		yield(get_tree().create_timer(cycling_end_wait), 'timeout')
+		scroll_direction = 1
+		end = scroll.max_value - rect_min_size.y
