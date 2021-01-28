@@ -22,7 +22,6 @@ func _init(title:String, msg:String, type=Type.OK):
 	UIName = "common/panels/MessageBox.tscn"
 	layer = UiManager.Layers.popup
 	_type = type
-	
 	_title = title
 	_msg = msg
 
@@ -40,6 +39,8 @@ func _ready():
 	elif _type == Type.OK_CANCEL:
 		_btn_cancel.show()
 		_btn_ok.show()
+		
+	_btn_ok.grab_focus()
 		
 	_lbl_title.text = _title
 	_edit_body.set_bbcode(_msg)

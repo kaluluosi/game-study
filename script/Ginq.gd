@@ -29,7 +29,7 @@ func val():
 
 
 func _new_ginq(iterable:Array, operators:=[], lambdas:=[]) -> Ginq:
-	return load(self.get_script().get_path()).new(iterable, operators, lambdas)
+	return Ginq.new(iterable, operators, lambdas)
 
 func _clone() -> Ginq:
 	return _new_ginq(array, _operators.duplicate(true), _lambdas.duplicate(true))	

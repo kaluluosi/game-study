@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://asset/sprite/tile/BaseTile.tres" type="TileSet" id=1]
+[ext_resource path="res://asset/sprite/Player/Player1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://asset/sprite/Props/ladder/ladder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/factory.gd" type="Script" id=4]
+
+[node name="hehe" type="Node2D"]
+position = Vector2( 0, 1 )
+script = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 70, 71 )
+collision_friction = 0.3
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0 )
+
+[node name="ladder" parent="." instance=ExtResource( 3 )]
+position = Vector2( 531.635, 317.823 )
+handle_position = Vector2( 0, -198.733 )
+
+[node name="Player1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 407.027, 70.9978 )
+collision_mask = 13
+physics_material_override = null
+custom_integrator = false
+contacts_reported = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="left" type="Button" parent="UI"]
+margin_left = 24.3676
+margin_top = 528.672
+margin_right = 65.3676
+margin_bottom = 548.672
+text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="Button" parent="UI"]
+margin_left = 79.9894
+margin_top = 528.672
+margin_right = 120.989
+margin_bottom = 548.672
+action_mode = 0
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}

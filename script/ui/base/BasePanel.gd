@@ -12,6 +12,7 @@ func _init():
 	connect("ready",self, 'ready')
 	
 func ready():
+	ui.grab_focus()
 	ui.add_child(_animation_player)
 	
 	var _in = load("res://asset/ui/common/animation/ScaleUp.tres") as Animation

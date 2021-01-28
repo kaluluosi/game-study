@@ -19,7 +19,11 @@ onready var Layers = {
 	top = $Layers/top
 }
 
+func _ready():
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 var global_value = {}
+
 
 func add_ui_to_layer(panel:BaseView, layer:Control):
 	layer.add_child(panel.ui)

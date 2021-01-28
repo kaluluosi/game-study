@@ -63,6 +63,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -55.0
 margin_right = -5.0
+focus_neighbour_right = NodePath("../../Buttons/HBoxContainer/BtnOk")
+focus_neighbour_bottom = NodePath("../../Buttons/HBoxContainer/BtnOk")
+focus_next = NodePath("../../Buttons/HBoxContainer/BtnOk")
 custom_styles/hover = SubResource( 1 )
 icon = SubResource( 2 )
 expand_icon = true
@@ -92,6 +95,8 @@ custom_fonts/normal_font = ExtResource( 6 )
 text = "hello"
 script = ExtResource( 7 )
 bb_code = "[color=red]hello[/color]"
+cycling_scroll = false
+cycling_end_wait = 1.0
 
 [node name="Buttons" type="Control" parent="Panel/VBoxContainer"]
 margin_top = 170.0
@@ -115,10 +120,14 @@ __meta__ = {
 }
 
 [node name="BtnOk" type="Button" parent="Panel/VBoxContainer/Buttons/HBoxContainer"]
-margin_left = 200.0
-margin_right = 300.0
+margin_left = 145.0
+margin_right = 245.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 100, 60 )
+focus_neighbour_top = NodePath("../../../TitleBar/BtnClose")
+focus_neighbour_right = NodePath("../BtnCancel")
+focus_next = NodePath("../BtnCancel")
+focus_previous = NodePath("../BtnCancel")
 size_flags_horizontal = 0
 text = "OK"
 __meta__ = {
@@ -126,11 +135,14 @@ __meta__ = {
 }
 
 [node name="BtnCancel" type="Button" parent="Panel/VBoxContainer/Buttons/HBoxContainer"]
-visible = false
-margin_left = 318.0
-margin_right = 418.0
+margin_left = 255.0
+margin_right = 355.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 100, 60 )
+focus_neighbour_left = NodePath("../BtnOk")
+focus_neighbour_top = NodePath("../../../TitleBar/BtnClose")
+focus_next = NodePath("../BtnOk")
+focus_previous = NodePath("../BtnOk")
 size_flags_horizontal = 0
 text = "cancel"
 __meta__ = {
