@@ -3,11 +3,10 @@
 [ext_resource path="res://asset/sprite/tile/BaseTile.tres" type="TileSet" id=1]
 [ext_resource path="res://asset/sprite/Player/Player1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://asset/sprite/Props/ladder/ladder.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scene/factory.gd" type="Script" id=4]
+[ext_resource path="res://asset/sprite/Props/coin/coin.tscn" type="PackedScene" id=5]
 
 [node name="hehe" type="Node2D"]
 position = Vector2( 0, 1 )
-script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -22,31 +21,19 @@ position = Vector2( 531.635, 317.823 )
 handle_position = Vector2( 0, -198.733 )
 
 [node name="Player1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 407.027, 70.9978 )
+position = Vector2( 82.8313, 198.133 )
 collision_mask = 13
 physics_material_override = null
 custom_integrator = false
 contacts_reported = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="coin" parent="." instance=ExtResource( 5 )]
 
-[node name="left" type="Button" parent="UI"]
-margin_left = 24.3676
-margin_top = 528.672
-margin_right = 65.3676
-margin_bottom = 548.672
-text = "<"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="coin2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 229.422, 312.514 )
 
-[node name="right" type="Button" parent="UI"]
-margin_left = 79.9894
-margin_top = 528.672
-margin_right = 120.989
-margin_bottom = 548.672
-action_mode = 0
-text = ">"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="coin3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 386.222, 316.752 )
+
+[node name="coin4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 295.109, 310.395 )
