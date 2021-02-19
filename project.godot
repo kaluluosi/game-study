@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/ui/base/BaseView.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://script/Logic/Character/Character.gd"
+}, {
 "base": "Object",
 "class": "Ginq",
 "language": "GDScript",
@@ -79,6 +84,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/ui/common/rich_text_effect/pulse.gd"
 }, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://script/StateMachine/State.gd"
+}, {
+"base": "State",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://script/StateMachine/StateMachine.gd"
+}, {
+"base": "Node",
+"class": "StateTranslation",
+"language": "GDScript",
+"path": "res://script/StateMachine/StateTranslation.gd"
+}, {
 "base": "Object",
 "class": "UIUtil",
 "language": "GDScript",
@@ -88,6 +108,7 @@ _global_script_class_icons={
 "AnimatedSpriteEx": "",
 "BasePanel": "",
 "BaseView": "",
+"Character": "",
 "Ginq": "",
 "HideTextFX": "",
 "Ladder": "",
@@ -99,12 +120,16 @@ _global_script_class_icons={
 "RichTextLabelEx": "",
 "RichTextMatrix": "",
 "RichTextPulse": "",
+"State": "",
+"StateMachine": "",
+"StateTranslation": "",
 "UIUtil": ""
 }
 
 [application]
 
 config/name="game-study"
+run/main_scene="res://scene/boot.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
@@ -115,6 +140,7 @@ default_bus_layout=""
 [autoload]
 
 UiManager="*res://script/ui/UIManager.tscn"
+GameMain="*res://script/GameMain.gd"
 
 [editor_plugins]
 
@@ -193,4 +219,3 @@ quality/driver/fallback_to_gles2=true
 quality/filters/use_nearest_mipmap_filter=true
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=1
-environment/default_environment="res://default_env.tres"

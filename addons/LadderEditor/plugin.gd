@@ -38,8 +38,8 @@ func draw_handle(overlay):
 	if !is_valid():
 		return
 	var pos = get_handle_pos()
-	overlay.draw_circle(pos, 6, Color.white)
-	overlay.draw_circle(pos, 4, Color.pink)
+	overlay.draw_circle(pos, 6*2, Color.white)
+	overlay.draw_circle(pos, 4*2, Color.pink)
 
 func click_handle(pos):
 	return (pos - get_handle_pos()).length() <= 6

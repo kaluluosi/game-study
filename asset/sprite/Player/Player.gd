@@ -13,18 +13,23 @@ export var max_jump_speed:float = 800 # 最高跳跃速度
 
 var on_ground = false
 var climbable = false setget _set_climbable
+var _store_gravity_scale
 
 onready var animated_sprite:AnimatedSprite = $AnimatedSpriteEx
 onready var grounded:RayCast2D = $grounded
+onready var audio_player:AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+signal grounded
 
 func _ready():
 	connect("body_entered", self, "_body_entered")
+	_store_gravity_scale = gravity_scale
 	
 func _set_climbable(value):
 	climbable = value
 	
 	if !climbable:
-		gravity_scale = 1 
+		gravity_scale = _store_gravity_scale 
 
 func _get_input():
 	
@@ -46,14 +51,18 @@ func _get_input():
 	
 func _check_grounded():
 	if grounded.is_colliding():
+		if on_ground == false:
+			emit_signal("grounded")
 		on_ground = true
 	else:
 		on_ground = false
 	
 	
 func _switch_collision(duck:bool = false):
-	$BodyCollision.visible = !duck
-	$BodyDuckCollision.visible = duck
+	$BodyCollision.set_deferred('disabled', duck)
+	$BodyDuckCollision.set_deferred('disabled', !duck)
+#	$BodyCollision.disabled = duck
+#	$BodyDuckCollision.disabled = !duck
 	
 	
 func _integrate_forces(state):
@@ -75,9 +84,11 @@ func _integrate_forces(state):
 			linear_v.y -= _temp_jump_acc
 			_temp_jump_acc *= jump_damp
 			linear_v.y = max(-max_jump_speed, linear_v.y)
-		else:
-			linear_v = Vector2.ZERO
-	
+			
+			if on_ground:
+				audio_player.play(0.15)
+
+			
 	if inputs.down and on_ground:
 		var collider = grounded.get_collider() as Node2D
 		if collider and 'one_way_platform' in collider.get_groups():
@@ -93,9 +104,13 @@ func _integrate_forces(state):
 	
 	linear_velocity = linear_v
 	
-	if abs(linear_v.x) > 0.5 and on_ground:
-		animated_sprite.flip_h = linear_v.x < 0
-		
+	if on_ground:
+		if inputs.right:
+			animated_sprite.flip_h = false
+		elif inputs.left:
+			animated_sprite.flip_h = true
+	
+	scale = Vector2(1, -1)*scale if gravity_scale<0 else scale
 		
 	if on_ground:
 		if linear_v.x != 0:
@@ -117,9 +132,18 @@ func _integrate_forces(state):
 	else:
 		animated_sprite.play('jump')
 
-func _process(delta):
+func _physics_process(delta):
 	var input = _get_input()
 	if input.jump and climbable:
-		gravity_scale = 0
+		if gravity_scale != 0:
+			_store_gravity_scale = gravity_scale
+			gravity_scale = 0
+		linear_velocity.y = 0
 		translate(Vector2.UP*200*delta)
-	
+	elif input.down and climbable and !on_ground:
+		if gravity_scale != 0:
+			_store_gravity_scale = gravity_scale
+			gravity_scale = 0
+		linear_velocity.y = 0
+		translate(Vector2.DOWN*200*delta)
+

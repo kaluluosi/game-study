@@ -1,9 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://asset/sprite/tile/BaseTile.tres" type="TileSet" id=1]
-[ext_resource path="res://asset/sprite/Player/Player1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://asset/sprite/Props/ladder/ladder.tscn" type="PackedScene" id=3]
-[ext_resource path="res://asset/sprite/Props/coin/coin.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.3413, 31.8967 )
 
 [node name="hehe" type="Node2D"]
 position = Vector2( 0, 1 )
@@ -11,29 +13,19 @@ position = Vector2( 0, 1 )
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 70, 71 )
-collision_friction = 0.3
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0 )
+tile_data = PoolIntArray( -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -393207, 0, 0, -393206, 0, 0, -393205, 0, 0, -393204, 0, 0, -393203, 0, 0, -393202, 0, 0, -393201, 0, 0, -393200, 0, 0, -393199, 0, 0, -393198, 0, 0, -393197, 0, 0, -393196, 0, 0, -393195, 0, 0, -393194, 0, 0, -393193, 0, 0, -393192, 0, 0, -262145, 0, 0, -327656, 0, 0, -196609, 0, 0, -262120, 0, 0, -131073, 0, 0, -196584, 0, 0, -65537, 0, 0, -131048, 0, 0, -1, 0, 0, -65512, 0, 0, 65535, 0, 0, 24, 0, 0, 131071, 0, 0, 65560, 0, 0, 196607, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131096, 0, 0, 262143, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 196629, 0, 0, 196630, 0, 0, 196631, 0, 0, 196632, 0, 0, 327679, 0, 0, 262162, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0 )
 
 [node name="ladder" parent="." instance=ExtResource( 3 )]
-position = Vector2( 531.635, 317.823 )
-handle_position = Vector2( 0, -198.733 )
+position = Vector2( 531.19, 317.823 )
+handle_position = Vector2( 0, -218.823 )
 
-[node name="Player1" parent="." instance=ExtResource( 2 )]
-position = Vector2( 82.8313, 198.133 )
-collision_mask = 13
-physics_material_override = null
-custom_integrator = false
-contacts_reported = 1
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 106.463, 84.4147 )
 
-[node name="coin" parent="." instance=ExtResource( 5 )]
+[node name="Sprite" type="Sprite" parent="Player"]
+texture = ExtResource( 2 )
 
-[node name="coin2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 229.422, 312.514 )
-
-[node name="coin3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 386.222, 316.752 )
-
-[node name="coin4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 295.109, 310.395 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )

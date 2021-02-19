@@ -4,9 +4,6 @@
 [ext_resource path="res://asset/atlas/Base pack/Items/coinGold.png" type="Texture" id=2]
 [ext_resource path="res://asset/sprite/Props/coin/coin.gd" type="Script" id=3]
 
-
-
-
 [sub_resource type="CircleShape2D" id=1]
 radius = 18.956
 
@@ -58,6 +55,8 @@ __meta__ = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
