@@ -17,10 +17,13 @@ func effect(key_name:String):
 	var skill_data = {
 		effects={
 			slash_0={
-				name="Swoosh2",
-				offset=Vector2(100,0)
+				name="res://PF/Swoosh2.tscn",
+				offset=Vector2(8, 0)
 			}
 		}
 	}
 	var effect = skill_data.effects[key_name]
 	print('创建特效 ',effect)
+	var fx = load(effect.name).instance() as Node2D
+	fx.position = effect.offset
+	add_child(fx)

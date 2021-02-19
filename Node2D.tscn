@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://asset/atlas/PlatformerForest/characters.png" type="Texture" id=1]
-[ext_resource path="res://asset/atlas/PlatformerForest/swoosh.png" type="Texture" id=2]
 [ext_resource path="res://Player.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -201,34 +200,6 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "default"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="KinematicBody2D" parent="."]
@@ -258,12 +229,3 @@ anims/punch = SubResource( 9 )
 anims/run = SubResource( 10 )
 anims/slash = SubResource( 11 )
 anims/walk = SubResource( 12 )
-
-[node name="Swoosh2" type="Sprite" parent="Player"]
-visible = false
-position = Vector2( 6.50735, -0.667419 )
-texture = ExtResource( 2 )
-hframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Swoosh2"]
-anims/default = SubResource( 13 )
