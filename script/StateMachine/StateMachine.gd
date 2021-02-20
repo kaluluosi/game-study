@@ -1,7 +1,7 @@
 extends State
 class_name StateMachine
 
-var states = []
+var states = {}
 
 var entry:State
 var exit:State
@@ -24,7 +24,7 @@ func _on_finished():
 	finished = true
 	
 func add_state(state:State):
-	states.append(state)
+	states[state.name] = state
 	state.target = target
 	state.parameters = parameters # 共享参数表
 	
