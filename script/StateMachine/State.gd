@@ -1,35 +1,56 @@
-extends Node
+extends Resource
 class_name State
 
-signal entered
+enum SwitchMode{
+	Immediate,
+	AtEnd
+}
 
-var target:Node
-var translations = [] 
-var finished:bool = false
+var name:String
 var parameters:Dictionary = {}
+var target:Node2D
+var finished:bool setget set_finished,get_finished
 
+var translations = []
+
+signal finished
+
+func _init(target=null, name:String=''):
+	self.target = target
+	self.name = name
+	
+func set_finished(value):
+	if finished != value and finished==true:
+		emit_signal("finished")
+	finished = value
+
+func get_finished():
+	return finished
+	
 func enter():
-	finished = false
-	emit_signal("entered")
 	pass
 	
 func exit():
-	pass
+	finished = false
 	
-func _unhandled_input(event):
+func add_translation(to:State, condition:String="finished", mode=SwitchMode.Immediate):
+	var expression = Expression.new()
+	var translation = {
+		from=self,
+		to=to,
+		condition=expression,
+		mode=mode
+	}
+	translations.append(translation)
+	
+func _physics_process(delta):
 	pass
 	
 func _process(delta):
 	pass
 	
-func _physics_process(delta):
+func _unhandled_input(event):
 	pass
-
-func add_translation(condition:String, to_state:State):
-	var expression = Expression.new()
-	expression.parse(condition)
-	translations.append({
-		state=self,
-		condition=expression,
-		to_state=to_state
-	})
+	
+func _input(event):
+	pass

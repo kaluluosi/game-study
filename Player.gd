@@ -12,18 +12,3 @@ func _ready():
 	$AnimationPlayer.play("slash")
 
 
-func effect(key_name:String):
-	print(key_name)
-	var skill_data = {
-		effects={
-			slash_0={
-				name="res://PF/Swoosh2.tscn",
-				offset=Vector2(8, 0)
-			}
-		}
-	}
-	var effect = skill_data.effects[key_name]
-	print('创建特效 ',effect)
-	var fx = load(effect.name).instance() as Node2D
-	fx.position = effect.offset
-	add_child(fx)

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/Logic/Character/Character.gd"
 }, {
+"base": "StateTranslation",
+"class": "ExpressionStateTranslation",
+"language": "GDScript",
+"path": "res://script/StateMachine/ExpressionTranslation.gd"
+}, {
 "base": "Object",
 "class": "Ginq",
 "language": "GDScript",
@@ -95,6 +100,11 @@ _global_script_classes=[ {
 "path": "res://script/StateMachine/StateMachine.gd"
 }, {
 "base": "Node",
+"class": "StateMachinePlayer",
+"language": "GDScript",
+"path": "res://script/StateMachine/StateMachinePlayer.gd"
+}, {
+"base": "Node",
 "class": "StateTranslation",
 "language": "GDScript",
 "path": "res://script/StateMachine/StateTranslation.gd"
@@ -109,6 +119,7 @@ _global_script_class_icons={
 "BasePanel": "",
 "BaseView": "",
 "Character": "",
+"ExpressionStateTranslation": "",
 "Ginq": "",
 "HideTextFX": "",
 "Ladder": "",
@@ -122,6 +133,7 @@ _global_script_class_icons={
 "RichTextPulse": "",
 "State": "",
 "StateMachine": "",
+"StateMachinePlayer": "",
 "StateTranslation": "",
 "UIUtil": ""
 }

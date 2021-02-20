@@ -1,12 +1,9 @@
-extends Node
+extends Resource
 class_name StateTranslation
 
-var target:Node
-var cur_state
-var next_state
+var from:State
+var to:State
 
 func is_valid() -> bool:
 	return false
 	
-func on_transition():
-	pass
