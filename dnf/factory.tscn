@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dnf/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://dnf/saber/90.png" type="Texture" id=2]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73.1363, 156.975 )
 
+[node name="Sprite" parent="Player/pivot" index="0"]
+texture = ExtResource( 2 )
+offset = Vector2( 20, 0 )
+
 [node name="Player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 202.76, 158.165 )
+position = Vector2( 170.668, 158.165 )
 enable = false
 
 [editable path="Player"]

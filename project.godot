@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/ui/common/rich_text_effect/pulse.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": "State",
 "language": "GDScript",
 "path": "res://script/StateMachine/State.gd"
@@ -109,7 +109,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/StateMachine/StateMachinePlayer.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": "StateTranslation",
 "language": "GDScript",
 "path": "res://script/StateMachine/StateTranslation.gd"
@@ -228,6 +228,9 @@ locale_filter=[ 1, [ "en", "zh" ] ]
 
 [physics]
 
+common/physics_fps=120
+common/physics_jitter_fix=0.1
+2d/thread_model=2
 2d/default_gravity=1200
 2d/default_linear_damp=0.0
 

@@ -39,15 +39,21 @@ func _ready():
 func _physics_process(delta):
 	if enable == false:
 		return
-	if Input.is_action_pressed("ui_up"):
-		var skill = skills.skill2
-		current_skill = skill
-		for action in current_skill:
-			$AnimationPlayer.play(action.animation,-1, action.animation_speed)
-			current_action = action
-			yield($AnimationPlayer, "animation_finished")
+	if Input.is_action_just_pressed("ui_down"):
+		var state = State.new()
+		state.name = "attk"
+		
+		var state_machine = StateMachine.new()
+		state_machine.target = self
+		
+		state_machine.name = "root"
+		
+		state_machine.add_state(state)
+		state_machine.entry.add_translation(state)
+		
+		$StateMachinePlayer.state_machine = state_machine
 	
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_up"):
 		var skill = skills.skill1
 		current_skill = skill
 		for action in current_skill:

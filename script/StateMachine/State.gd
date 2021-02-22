@@ -1,22 +1,21 @@
 extends Resource
 class_name State
 
-enum SwitchMode{
-	Immediate,
-	AtEnd
-}
-
+# 状态名字
 var name:String
+
+# 条件参数，会被父状态机的parameter覆盖
 var parameters:Dictionary = {}
-var target:Node2D
+
+# 结束标志，这个标志主要用于translation里用作跳转条件
 var finished:bool setget set_finished,get_finished
 
+# 跳转规则
 var translations = []
 
 signal finished
 
-func _init(target=null, name:String=''):
-	self.target = target
+func _init(name:String=''):
 	self.name = name
 	
 func set_finished(value):
@@ -27,30 +26,27 @@ func set_finished(value):
 func get_finished():
 	return finished
 	
-func enter():
-	pass
+func enter(target):
+	finished = true
 	
-func exit():
+func exit(target):
 	finished = false
 	
-func add_translation(to:State, condition:String="finished", mode=SwitchMode.Immediate):
-	var expression = Expression.new()
-	var translation = {
-		from=self,
-		to=to,
-		condition=expression,
-		mode=mode
-	}
+func add_translation(to_state_name:String, condition:String="finished", mode=StateTranslation.SwitchMode.Immediate):
+	var translation = ExpressionStateTranslation.new(condition, to_state_name, mode)
 	translations.append(translation)
 	
-func _physics_process(delta):
+func add_translation_obj(translation:StateTranslation):
+	translations.append(translation)
+	
+func _physics_process(target, delta):
 	pass
 	
-func _process(delta):
+func _process(target, delta):
 	pass
 	
-func _unhandled_input(event):
+func _unhandled_input(target,event):
 	pass
 	
-func _input(event):
+func _input(target, event):
 	pass

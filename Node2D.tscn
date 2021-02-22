@@ -1,7 +1,14 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://asset/atlas/PlatformerForest/characters.png" type="Texture" id=1]
+[ext_resource path="res://Node2D.gd" type="Script" id=2]
 [ext_resource path="res://Player.gd" type="Script" id=3]
+[ext_resource path="res://script/StateMachine/StateMachine.gd" type="Script" id=4]
+[ext_resource path="res://script/StateMachine/StateMachinePlayer.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+states = [  ]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.65088
@@ -187,6 +194,8 @@ tracks/0/keys = {
 }
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+test_resource = SubResource( 13 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 45.2177, 35.5401 )
@@ -197,7 +206,7 @@ script = ExtResource( 3 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 23
-frame = 10
+frame = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 visible = false
@@ -216,3 +225,7 @@ anims/punch = SubResource( 9 )
 anims/run = SubResource( 10 )
 anims/slash = SubResource( 11 )
 anims/walk = SubResource( 12 )
+
+[node name="StateMachinePlayer" type="Node" parent="."]
+script = ExtResource( 5 )
+target = NodePath("../Player")

@@ -1,9 +1,15 @@
 extends Resource
 class_name StateTranslation
 
-var from:State
-var to:State
 
-func is_valid() -> bool:
+enum SwitchMode{
+	Immediate,
+	AtEnd
+}
+
+var to:String
+var mode
+
+func is_valid(state) -> bool:
 	return false
 	
