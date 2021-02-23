@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://script/Lambda/Lambda.gd"
 }, {
+"base": "Node",
+"class": "LambdaHelper",
+"language": "GDScript",
+"path": "res://script/Lambda/LambdaHelper.gd"
+}, {
 "base": "BasePanel",
 "class": "MessageBox",
 "language": "GDScript",
@@ -136,6 +141,7 @@ _global_script_class_icons={
 "Hurt": "",
 "Ladder": "",
 "Lambda": "",
+"LambdaHelper": "",
 "MessageBox": "",
 "Player": "",
 "PopHint": "",

@@ -1,18 +1,13 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 export var enable = true
-var current_skill
-var current_action
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 var express
 var action_hits
+
+func _ready():
+	pass
+
 func _physics_process(delta):
 	if enable == false:
 		return
@@ -60,8 +55,6 @@ func _physics_process(delta):
 var hit_targets = []
 
 func _on_Hit_area_entered(area:Area2D):
-#	area.make_damage(name, '100点')
-#	print('owner is ', area.owner.name)
 	prints(area.name, area.get_groups())
 	if (area in hit_targets) == false:
 		hit_targets.append(area)

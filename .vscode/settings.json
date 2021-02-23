@@ -2,5 +2,8 @@
   "godot_tools.editor_path": "c:\\Program Files (x86)\\Steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
   "godot_tools.scene_file_config": "c:\\Users\\kalul\\OneDrive\\Desktop\\game-study\\scene\\boot.tscn",
   "editor.detectIndentation": false,
-	"editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"workbench.tree.indent": 4,
+	"editor.tabSize": 2,
+	"editor.useTabStops": false
 }
