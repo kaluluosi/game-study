@@ -14,6 +14,7 @@ var finished:bool setget set_finished,get_finished
 var translations = []
 
 signal finished
+signal entered
 
 func _init(name:String=''):
 	self.name = name
@@ -22,14 +23,19 @@ func set_finished(value):
 	if finished != value and finished==true:
 		emit_signal("finished")
 	finished = value
+	
+func set_parameter(key, value):
+	parameters[key]=value
 
 func get_finished():
 	return finished
 	
 func enter(target):
+	emit_signal("entered")
 	finished = true
 	
 func exit(target):
+	emit_signal("finished")
 	finished = false
 	
 func add_translation(to_state_name:String, condition:String="finished", mode=StateTranslation.SwitchMode.Immediate):

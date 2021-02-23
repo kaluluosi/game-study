@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "AbilityAction",
+"language": "GDScript",
+"path": "res://script/AbilitySystem/AbilityAction.gd"
+}, {
 "base": "AnimatedSprite",
 "class": "AnimatedSpriteEx",
 "language": "GDScript",
@@ -120,6 +125,7 @@ _global_script_classes=[ {
 "path": "res://script/ui/common/utils/UIUtil.gd"
 } ]
 _global_script_class_icons={
+"AbilityAction": "",
 "AnimatedSpriteEx": "",
 "BasePanel": "",
 "BaseView": "",

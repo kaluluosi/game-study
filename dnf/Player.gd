@@ -5,63 +5,58 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 export var enable = true
-
-var action_1 = 		{
-		damage=100,
-		animation="斜内砍",
-		animation_speed=5
-		}
-		
-var action_2 = {
-		damage=120,
-		animation="横砍",
-		animation_speed=1
-	}
-
-var skills = {
-	"skill1":[
-		action_1,
-		action_2
-	],
-	"skill2":[
-		action_1,
-		action_1
-	]
-}
-
 var current_skill
 var current_action
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
+var express
+var action_hits
 func _physics_process(delta):
 	if enable == false:
 		return
 	if Input.is_action_just_pressed("ui_down"):
-		var state = State.new()
-		state.name = "attk"
+		
+		action_hits = StateMachine.new()
+		action_hits.name = "连砍"
+		
+		var action_01 = AbilityAction.new()
+		action_01.name = "横砍"
+		action_01.animation_name = "横砍"
+		action_01.animation_speed = 3
+		
+		var action_02 = AbilityAction.new()
+		action_02.name = "斜内砍"
+		action_02.animation_name = "斜内砍"
+		action_02.animation_speed = 3
 		
 		var state_machine = StateMachine.new()
-		state_machine.target = self
-		
 		state_machine.name = "root"
 		
-		state_machine.add_state(state)
-		state_machine.entry.add_translation(state)
+		
+		action_hits.add_state(action_01)
+		action_hits.add_state(action_02)
+		action_hits.start.add_translation('横砍')
+		action_01.add_translation("斜内砍")
+		action_02.add_translation("end")
+		
+		var action_final = StateMachine.new()
+		action_final.name = "终结"
+		
+		var action_03 = AbilityAction.new()
+		action_03.name = "终结"
+		action_03.animation_name = "斜内砍"
+		action_03.animation_speed = 0.5
+		
+		state_machine.add_state(action_hits)
+		state_machine.start.add_translation('连砍')
+		state_machine.add_state(action_03)
+		action_hits.add_translation("终结", "counter >6")
 		
 		$StateMachinePlayer.state_machine = state_machine
-	
-	if Input.is_action_pressed("ui_up"):
-		var skill = skills.skill1
-		current_skill = skill
-		for action in current_skill:
-			$AnimationPlayer.play(action.animation,-1, action.animation_speed)
-			current_action = action
-			yield($AnimationPlayer, "animation_finished")
-	
-	
+
+		
 var hit_targets = []
 
 func _on_Hit_area_entered(area:Area2D):
@@ -85,4 +80,11 @@ func _on_Hit_area_exited(area):
 func hit():
 	for area in hit_targets:
 		if area.is_in_group("hurtbox"):
-			(area as Hurt).make_damage(name, "%s %d"%[current_action.animation, current_action.damage])
+			# attacker = self
+			# target = area
+			# skill_info = state_machine.active_state
+			# hit_info = {
+			#  damageId = self.HitBox.meta('damageId')
+			# }
+			
+			(area as Hurt).make_damage(name, "100")

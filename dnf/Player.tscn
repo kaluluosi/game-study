@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://dnf/saber/6.png" type="Texture" id=1]
 [ext_resource path="res://dnf/saber/3.png" type="Texture" id=2]
@@ -216,6 +216,30 @@ tracks/3/keys = {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 33.4026, 10 )
 
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "斜内砍"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "横砍"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+"states/斜内砍/node" = SubResource( 7 )
+"states/斜内砍/position" = Vector2( 221, 116 )
+"states/横砍/node" = SubResource( 8 )
+"states/横砍/position" = Vector2( 384, 103 )
+transitions = [ "斜内砍", "横砍", SubResource( 9 ), "横砍", "斜内砍", SubResource( 10 ) ]
+start_node = "斜内砍"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 27 )
 
@@ -227,7 +251,8 @@ position = Vector2( -23.5983, -1.49831 )
 
 [node name="Sprite" type="Sprite" parent="pivot"]
 position = Vector2( 3.74579, -53.9391 )
-texture = ExtResource( 6 )
+texture = ExtResource( 17 )
+offset = Vector2( 80, 0 )
 
 [node name="Hurt" type="Area2D" parent="pivot" groups=[
 "hurtbox",
@@ -247,7 +272,6 @@ shape = SubResource( 1 )
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 115.744, -79.0357 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle_combat = SubResource( 3 )
@@ -257,6 +281,12 @@ anims/idle_combat = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2.24741, -11.2373 )
 shape = SubResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 12 )
 [connection signal="make_damage" from="pivot/Hurt" to="." method="_on_Hurt_make_damage"]
 [connection signal="area_entered" from="pivot/Hit" to="." method="_on_Hit_area_entered"]
 [connection signal="area_exited" from="pivot/Hit" to="." method="_on_Hit_area_exited"]

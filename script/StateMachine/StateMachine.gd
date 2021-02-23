@@ -21,16 +21,20 @@ func _init():
 	
 	active_state = start # 设置start为 活动状态
 	
-	end.connect("finished", self, '_on_finished')
-	start.connect("finished", self, "_on_entered")
+	end.connect("finished", self, '_on_end_finished')
+	start.connect("finished", self, "_on_start_entered")
+	
+	end.add_translation('start')
 	
 func enter(target):
+	counter = 0
 	active_state.enter(target)
 	
-func _on_entered():
+func _on_start_entered():
 	counter += 1
+	finished = false
 	
-func _on_finished():
+func _on_end_finished():
 	finished = true
 	
 func add_state(state:State):
@@ -71,12 +75,12 @@ func _check_translation(target):
 	var translations = active_state.translations + any.translations
 	for tr in translations:
 		tr = tr as StateTranslation
-		var can_translate = tr.is_valid(active_state)
+		var can_translate = tr.is_valid(target, active_state)
 		if tr.mode == StateTranslation.SwitchMode.AtEnd:
 			can_translate &= active_state.finished
 		
 		if can_translate:
-			print(active_state.name, ' -> ', tr.to)
+			prints(name ,active_state.name, ' -> ', tr.to)
 			active_state.exit(target)
 			var next_state = get_state(tr.to)
 			active_state = next_state

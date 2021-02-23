@@ -10,6 +10,6 @@ enum SwitchMode{
 var to:String
 var mode
 
-func is_valid(state) -> bool:
+func is_valid(target,state) -> bool:
 	return false
 	
