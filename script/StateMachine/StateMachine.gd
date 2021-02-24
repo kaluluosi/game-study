@@ -80,7 +80,7 @@ func _check_translation(target):
 			can_translate &= active_state.finished
 		
 		if can_translate:
-			prints(name ,active_state.name, ' -> ', tr.to)
+			prints(name,':',active_state.name, ' -> ', tr.to)
 			active_state.exit(target)
 			var next_state = get_state(tr.to)
 			active_state = next_state

@@ -1,0 +1,119 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://asset/atlas/dnf/saber/129.png" type="Texture" id=1]
+[ext_resource path="res://resources/charactor/Player/anim/hurt1.tres" type="Animation" id=2]
+[ext_resource path="res://resources/charactor/Player/anim/jump_after.tres" type="Animation" id=3]
+[ext_resource path="res://resources/charactor/Player/anim/idle_normal.tres" type="Animation" id=4]
+[ext_resource path="res://asset/atlas/dnf/saber/100.png" type="Texture" id=5]
+[ext_resource path="res://resources/charactor/Player/anim/walk.tres" type="Animation" id=6]
+[ext_resource path="res://resources/charactor/Player/anim/run.tres" type="Animation" id=7]
+[ext_resource path="res://resources/charactor/Player/anim/idle_battle.tres" type="Animation" id=8]
+[ext_resource path="res://resources/charactor/Player/anim/fall_down.tres" type="Animation" id=9]
+[ext_resource path="res://resources/charactor/Player/anim/fall_down_air.tres" type="Animation" id=10]
+[ext_resource path="res://resources/charactor/Player/anim/hurt2.tres" type="Animation" id=11]
+[ext_resource path="res://resources/charactor/Player/anim/jump_down.tres" type="Animation" id=12]
+[ext_resource path="res://asset/atlas/dnf/saber/127.png" type="Texture" id=19]
+[ext_resource path="res://asset/atlas/dnf/saber/128.png" type="Texture" id=20]
+[ext_resource path="res://asset/atlas/dnf/saber/125.png" type="Texture" id=21]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.7157
+height = 0.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "jump_after"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 3.13834 ),
+"update": 1,
+"values": [ ExtResource( 21 ), ExtResource( 20 ), ExtResource( 19 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 2, 12 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="AnimationNodeStateMachine" id=4]
+graph_offset = Vector2( -974, -69 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=5]
+
+[node name="Player" type="KinematicBody2D"]
+
+[node name="body" type="Position2D" parent="."]
+position = Vector2( -19.8214, 0 )
+__meta__ = {
+"_gizmo_extents_": 88.6
+}
+
+[node name="Sprite" type="Sprite" parent="body"]
+position = Vector2( 24, -56 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.924698, -23.8081 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall_down = ExtResource( 9 )
+anims/fall_down_air = ExtResource( 10 )
+anims/hurt1 = ExtResource( 2 )
+anims/hurt2 = ExtResource( 11 )
+anims/idle_battle = ExtResource( 8 )
+anims/idle_normal = ExtResource( 4 )
+anims/jump = ExtResource( 3 )
+anims/jump_after = SubResource( 2 )
+anims/jump_down = ExtResource( 12 )
+anims/jump_up = SubResource( 3 )
+anims/run = ExtResource( 7 )
+anims/walk = ExtResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 4 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 5 )

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/charactor/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://editscene/test.tres.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 681.62, 10 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 161.452, 317.859 )
+script = ExtResource( 2 )
+
+[node name="State" type="Label" parent="Player"]
+margin_left = -23.0
+margin_top = -138.0
+margin_right = 45.0
+margin_bottom = -124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position" type="Label" parent="Player"]
+margin_left = -14.8325
+margin_top = 8.47571
+margin_right = 25.1675
+margin_bottom = 22.4757
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 465.857, 536.492 )
+shape = SubResource( 2 )

@@ -1,25 +1,46 @@
+tool
 extends KinematicBody2D
 class_name Character
 
-export var gravity:float = 800
-export var move_speed:float = 400
-export var jump_speed:float = 400
-var max_jump_times:int = 2
-var cur_jump_time:int = 0
-var velocity:Vector2 
+export var move_speed:float = 100 setget , _get_move_speed
+export var jump_speed:float = 1
+export var gravity:float = -1
+var velocity:Vector2 #移动速度
+var direction:Vector2 #移动方向
+var attrs = {}
 
-func _physics_process(delta):
+var _state_machine:StateMachine
+
+onready var animation_player:AnimationPlayer = $AnimationPlayer
+onready var animation_tree:AnimationTree = $AnimationTree
+onready var state_machine_player:StateMachinePlayer = $StateMachinePlayer
+
+
+func _ready():
+	_state_machine = load("res://script/Logic/Character/States/CharactorStateMachine.gd").new()
+	_state_machine.name = 'root'
+	state_machine_player.state_machine = _state_machine
+	scale.x = -1
+
+func _get_configuration_warning():
+	if get_node("AnimationPlayer") == null:
+		return "Character必须包含一个AnimationPlayer"
 	
-	velocity.y += gravity*delta
-	velocity.x = lerp(velocity.x, 0, 0.2)
-
-func move(direction:Vector2):
-	velocity.x = direction.x
+	if get_node("StateMachinePlayer") == null:
+		return "Character必须包含一个StateMachinePlayer"
 	
-func jump():
-	cur_jump_time+=1
-	if cur_jump_time >= max_jump_times:
-		cur_jump_time = 0
-		return
+	return ''
 
-	velocity.y -= jump_speed
+func _get_move_speed() -> float:
+	# 以后可以改为从attr里面获取move_speed
+	return move_speed
+
+func move(_direction:Vector2):
+	direction = _direction.normalized()
+
+func facing(_direction:Vector2):
+	
+	if _direction == Vector2.LEFT:
+		scale.x = -1
+	elif _direction == Vector2.RIGHT:
+		scale.x = 1
